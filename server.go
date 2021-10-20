@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
@@ -115,11 +116,16 @@ func errorResponse(w http.ResponseWriter, message string, httpStatusCode int) {
 }
 
 func main() {
+	port := "8082"
+	if v := os.Getenv("PORT"); len(v) > 0 {
+		port = v
+	}
+
 	// 使用 int 型 uid 生成 RTC Token
 	http.HandleFunc("/fetch_rtc_token", rtcTokenHandler)
 	fmt.Printf("Starting server at port 8082\n")
 
-	if err := http.ListenAndServe(":8082", nil); err != nil {
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatal(err)
 	}
 }
