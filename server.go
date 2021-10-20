@@ -116,11 +116,8 @@ func errorResponse(w http.ResponseWriter, message string, httpStatusCode int) {
 }
 
 func main() {
-<<<<<<< HEAD
+
 	port := "8082"
-=======
-	port := "80"
->>>>>>> 985c5d0dd6a9918fcf5ddba3c6dc3106f5c18ebb
 	if v := os.Getenv("PORT"); len(v) > 0 {
 		port = v
 	}
@@ -129,11 +126,7 @@ func main() {
 	http.HandleFunc("/fetch_rtc_token", rtcTokenHandler)
 	fmt.Printf("Starting server at port 8082\n")
 
-<<<<<<< HEAD
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
-=======
-	if err := http.ListenAndServe(port, nil); err != nil {
->>>>>>> 985c5d0dd6a9918fcf5ddba3c6dc3106f5c18ebb
 		log.Fatal(err)
 	}
 }
