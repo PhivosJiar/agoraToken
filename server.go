@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"time"
 
 	rtctokenbuilder "github.com/AgoraIO/Tools/DynamicKey/AgoraDynamicKey/go/src/RtcTokenBuilder"
 	rtmtokenbuilder "github.com/AgoraIO/Tools/DynamicKey/AgoraDynamicKey/go/src/RtmTokenBuilder"
@@ -35,14 +34,7 @@ func generateRtcToken(int_uid uint32, channelName string, role rtctokenbuilder.R
 	appID := "2997bf2437a74c5489878c5ec224b34d"
 
 	appCertificate := "0720a23244414748a082776246c86b5a"
-
-	expireTimeInSeconds := uint32(40)
-
-	currentTimestamp := uint32(time.Now().UTC().Unix())
-
-	expireTimestamp := currentTimestamp + expireTimeInSeconds*20
-
-	result, err := rtctokenbuilder.BuildTokenWithUID(appID, appCertificate, channelName, int_uid, role, expireTimestamp)
+	result, err := rtctokenbuilder.BuildTokenWithUID(appID, appCertificate, channelName, int_uid, role, 2147483647)
 	if err != nil {
 		fmt.Println(err)
 	} else {
@@ -129,11 +121,8 @@ func generateRtmToken(rtm_uid string) {
 	appID := "2997bf2437a74c5489878c5ec224b34d"
 
 	appCertificate := "0720a23244414748a082776246c86b5a"
-	expireTimeInSeconds := uint32(3600)
-	currentTimestamp := uint32(time.Now().UTC().Unix())
-	expireTimestamp := currentTimestamp + expireTimeInSeconds*20
 
-	result, err := rtmtokenbuilder.BuildToken(appID, appCertificate, rtm_uid, rtmtokenbuilder.RoleRtmUser, expireTimestamp)
+	result, err := rtmtokenbuilder.BuildToken(appID, appCertificate, rtm_uid, rtmtokenbuilder.RoleRtmUser, 2147483647)
 	if err != nil {
 		fmt.Println(err)
 	} else {
