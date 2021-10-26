@@ -40,7 +40,7 @@ func generateRtcToken(int_uid uint32, channelName string, role rtctokenbuilder.R
 
 	currentTimestamp := uint32(time.Now().UTC().Unix())
 
-	expireTimestamp := currentTimestamp + expireTimeInSeconds
+	expireTimestamp := currentTimestamp + expireTimeInSeconds*20
 
 	result, err := rtctokenbuilder.BuildTokenWithUID(appID, appCertificate, channelName, int_uid, role, expireTimestamp)
 	if err != nil {
@@ -131,7 +131,7 @@ func generateRtmToken(rtm_uid string) {
 	appCertificate := "0720a23244414748a082776246c86b5a"
 	expireTimeInSeconds := uint32(3600)
 	currentTimestamp := uint32(time.Now().UTC().Unix())
-	expireTimestamp := currentTimestamp + expireTimeInSeconds
+	expireTimestamp := currentTimestamp + expireTimeInSeconds*20
 
 	result, err := rtmtokenbuilder.BuildToken(appID, appCertificate, rtm_uid, rtmtokenbuilder.RoleRtmUser, expireTimestamp)
 	if err != nil {
